@@ -3,3 +3,17 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+body {
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas: "head" "carousel" "ribMenu" "filters" "products";
+  grid-template-columns: 1fr;
+  max-width: 1200px;
+  justify-content: center;
+  padding: 10px;
+}
+
+.header {
+  grid-area: head;
+}
