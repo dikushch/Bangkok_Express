@@ -8,7 +8,11 @@ class Page {
     this.slides = slides
     this.pageElements = {
       header: new Header().element,
-      carousel: new Carousel(this.slides).element,
+      carousel: new Carousel(
+        this.slides,
+        'assets/images/icons/angle-left-icon.svg',
+        'assets/images/icons/angle-icon.svg'
+      ).element,
     };
     this.element = this.createPageElement(Object.values(this.pageElements));
     this.render(this.element);

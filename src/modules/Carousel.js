@@ -20,7 +20,7 @@ export default class Carousel {
   createBtnElement = (direction, imgSrc) => {
     const btn = document.createElement('div');
     btn.classList.add('carousel__arrow');
-    btn.classList.add(`carousel__arrow-${direction}`);
+    btn.classList.add(`carousel__arrow--${direction}`);
 
     const img = document.createElement('img');
     img.alt = 'arrow icon';
