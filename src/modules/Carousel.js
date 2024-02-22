@@ -3,11 +3,15 @@ import AddProductBtn from "./AddProductBtn";
 export default class Carousel {
   constructor(slides, leftBtnImg, rightBtnImg) {
     this.slides = slides;
+    this.lastPosition = this.slides.length;
+    this.currentPosition = 1;
 
     this.leftBtn = this.createBtnElement('left', leftBtnImg);
+    this.leftBtn.style.display = 'none';
     this.rightBtn = this.createBtnElement('right', rightBtnImg);
     this.inner = this.createInnerElement(this.slides);
     this.element = this.createCarouselElement(this.leftBtn, this.rightBtn, this.inner);
+    this.addListeners();
   }
 
   createCarouselElement = (leftBtn, rightBtn, inner) => {
@@ -52,5 +56,30 @@ export default class Carousel {
 
     inner.append(...innerSlides);
     return inner;
+  }
+
+  addListeners = () => {
+    this.element.addEventListener('click', this.carouselBtnsHandler);
+  }
+
+  changeInnerPosition = (slide) => {
+    this.inner.style.transform = `translateX(calc(-100% * ${slide - 1}))`;
+  }
+
+  carouselBtnsHandler = (e) => {
+    const target = e.target.closest('.carousel__arrow');
+
+    if (target) {
+      if (target.classList.contains('carousel__arrow--left')) {
+        this.currentPosition--;
+        this.changeInnerPosition(this.currentPosition);
+      } else if (target.classList.contains('carousel__arrow--right')) {
+        this.currentPosition++;
+        this.changeInnerPosition(this.currentPosition);
+      }
+
+      this.currentPosition == 1 ? this.leftBtn.style.display = 'none' : this.leftBtn.style.display = '';
+      this.currentPosition == this.lastPosition ? this.rightBtn.style.display = 'none' : this.rightBtn.style.display = '';
+    }
   }
 }
