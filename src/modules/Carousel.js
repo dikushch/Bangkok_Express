@@ -67,9 +67,8 @@ export default class Carousel {
   }
 
   carouselBtnsHandler = (e) => {
-    const target = e.target.closest('.carousel__arrow');
-
-    if (target) {
+    if (e.target.closest('.carousel__arrow')) {
+      const target = e.target.closest('.carousel__arrow');
       if (target.classList.contains('carousel__arrow--left')) {
         this.currentPosition--;
         this.changeInnerPosition(this.currentPosition);
@@ -81,5 +80,18 @@ export default class Carousel {
       this.currentPosition == 1 ? this.leftBtn.style.display = 'none' : this.leftBtn.style.display = '';
       this.currentPosition == this.lastPosition ? this.rightBtn.style.display = 'none' : this.rightBtn.style.display = '';
     }
+
+    if (e.target.closest('.add-btn__element')) {
+      const target = e.target.closest('.add-btn__element')
+      console.log('1');
+      this.dispatchProductAddEvent(target);
+    }
+  }
+
+  dispatchProductAddEvent = (target) => {
+    this.element.dispatchEvent(new CustomEvent('product-add', {
+      detail: target.dataset.id,
+      bubbles: true
+    }));
   }
 }
