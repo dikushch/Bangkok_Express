@@ -2,14 +2,22 @@ import './style.scss';
 import Header from './modules/Header';
 import slides from './assets/slides';
 import Carousel from './modules/Carousel';
+import RibbonMenu from './modules/RibbonMenu';
+import categories from './assets/categories';
 
 class Page {
-  constructor(slides) {
-    this.slides = slides
+  constructor(slides, categories) {
+    this.slides = slides;
+    this.categories = categories;
     this.pageElements = {
       header: new Header().element,
       carousel: new Carousel(
         this.slides,
+        'assets/images/icons/angle-left-icon.svg',
+        'assets/images/icons/angle-icon.svg'
+      ).element,
+      ribbon: new RibbonMenu(
+        this.categories,
         'assets/images/icons/angle-left-icon.svg',
         'assets/images/icons/angle-icon.svg'
       ).element,
@@ -29,4 +37,4 @@ class Page {
   }
 }
 
-const page = new Page(slides);
+const page = new Page(slides, categories);
