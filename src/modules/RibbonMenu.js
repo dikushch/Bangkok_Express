@@ -4,8 +4,14 @@ export default class RibbonMenu {
 
     this.btnLeft = this.createBtnElement('left', leftBtnImg);
     this.btnRight = this.createBtnElement('right', rightBtnImg);
+    this.btnRight.classList.add('visible');
     this.inner = this.createInnerElement(this.categories);
     this.element = this.createMenuElement(this.btnLeft, this.inner, this.btnRight);
+
+    this.element.addEventListener('click', (event) => {
+      this.initCarousel(event);
+      this.selectCategory(event);
+    });
   }
 
   createMenuElement = (btnLeft, inner, btnRight) => {
@@ -47,5 +53,45 @@ export default class RibbonMenu {
 
     inner.append(...innerItems);
     return inner;
+  }
+
+  initCarousel = (event) => {
+    if (event.target.closest('.ribbon__arrow--right')) {
+      this.inner.scrollBy(350, 0);
+    } else if (event.target.closest('.ribbon__arrow--left')) {
+      this.inner.scrollBy(-350, 0);
+    }
+
+    this.hideButton();
+  }
+
+  hideButton = () => {
+    this.inner.scrollLeft == 0 ? this.btnLeft.classList.remove('visible') : this.btnLeft.classList.add('visible');
+
+    let scrollRight = this.inner.scrollWidth - this.inner.scrollLeft - this.inner.clientWidth;
+
+    scrollRight < 1 ? this.btnRight.classList.remove('visible') : this.btnRight.classList.add('visible');
+  }
+
+  selectCategory = (event) => {
+    let link = event.target.closest('.ribbon__item');
+
+    if (link) {
+      event.preventDefault();
+      if (link != this.activeItem && this.activeItem) {
+        this.activeItem.classList.remove('active');
+        this.activeItem = link;
+        link.classList.add('active');
+      } else {
+        this.activeItem = link;
+        link.classList.add('active');
+      }
+
+      let addEvent = new CustomEvent('ribbon-select', {
+        detail: link.dataset.id,
+        bubbles: true
+      });
+      this.element.dispatchEvent(addEvent);
+    }
   }
 }
