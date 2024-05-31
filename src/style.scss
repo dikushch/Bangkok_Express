@@ -212,9 +212,11 @@ body {
   }
 
   &__inner {
+    padding-bottom: 15px;
     margin-bottom: -15px;
     display: flex;
     flex-direction: row;
+    height: 67px;
     scroll-behavior: smooth;
     overflow-x: auto;
   }
