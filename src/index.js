@@ -5,6 +5,7 @@ import Carousel from './modules/Carousel';
 import RibbonMenu from './modules/RibbonMenu';
 import categories from './assets/categories';
 import StepSlider from './modules/StepSlider';
+import Filters from './modules/Filters';
 
 class Page {
   constructor(slides, categories) {
@@ -22,7 +23,7 @@ class Page {
         'assets/images/icons/angle-left-icon.svg',
         'assets/images/icons/angle-icon.svg'
       ).element,
-      slider: new StepSlider({ steps: 5, value: 3 }).element,
+      filters: new Filters().element,
     };
     this.element = this.createPageElement(Object.values(this.pageElements));
     this.render(this.element);
