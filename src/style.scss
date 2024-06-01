@@ -189,6 +189,13 @@ body {
     justify-content: center;
     cursor: pointer;
     display: none;
+    @media (max-width: 768px) {
+      width: 60px;
+    }
+
+    img {
+      width: 8px;
+    }
 
     &.visible {
       display: flex;
@@ -339,7 +346,7 @@ body {
   color: var(--color-grey);
   @media (max-width: 1024px) {
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     height: auto;
     align-items: flex-start;
   }
@@ -351,7 +358,6 @@ body {
     margin-right: 32px;
     @media (max-width: 768px) {
       flex-direction: column;
-      gap: 10px;
       width: 100%;
     }
   }
@@ -449,5 +455,41 @@ body {
       background: url(assets/images/icons/check-icon.svg) center no-repeat;
       background-size: cover;
     }
+  }
+}
+
+.products-grid {
+  width: 100%;
+  &__inner {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 530px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.card {
+  height: var(--card-height);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  transition: 0.2s all;
+  background-color: var(--color-black-middle);
+
+  &__img {
+    display: block;
+    max-width: 245px;
+    width: 100%;
+  }
+
+  &__add-btn {
+    width: 100%;
   }
 }

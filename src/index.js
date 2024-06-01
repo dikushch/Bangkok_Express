@@ -6,6 +6,7 @@ import RibbonMenu from './modules/RibbonMenu';
 import categories from './assets/categories';
 import StepSlider from './modules/StepSlider';
 import Filters from './modules/Filters';
+import ProductGrid from './modules/ProductGrid';
 
 class Page {
   constructor(slides, categories) {
@@ -35,7 +36,12 @@ class Page {
     return page;
   }
 
-  render = (page) => {
+  render = async (page) => {
+    let response = await fetch('assets/products.json');
+    this.products = await response.json();
+    this.pageElements.grid = new ProductGrid(this.products).element;
+    page.append(this.pageElements.grid);
+
     document.body.append(...page.childNodes);
   }
 }
