@@ -29,7 +29,7 @@ export default class ProductCard {
   }
 
   onClick = (event) => {
-    let btn = event.target.closest('.card__button');
+    let btn = event.target.closest('.add-btn__element');
 
     if (btn) {
       let addEvent = new CustomEvent('product-add', {
